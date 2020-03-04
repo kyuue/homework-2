@@ -60,11 +60,9 @@ ComplexNumber ComplexNumber::parse(const std::string & strParameter)
 		{
 			std::string realStr = str.substr(0, middleOperatorIndex);
 
-			if (realStr.size() == 0) // if doesn't contain a real part
-				realStr = "0";
-
-			real = std::stod(realStr);
-
+			if (realStr.size() != 0) // if doesn't contain a real part
+				real = std::stod(realStr);
+			
 			std::string imagStr = str.substr(middleOperatorIndex, str.size() - middleOperatorIndex);
 
 			if (imagStr[1] == 'i') // +i, -i 
