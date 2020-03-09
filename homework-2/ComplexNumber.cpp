@@ -39,7 +39,7 @@ ComplexNumber ComplexNumber::parse(const std::string & strParameter)
 
 		size_t middleOperatorIndex = str.rfind('+', indexOfImag);
 
-		if(middleOperatorIndex == std::string::npos)
+		if (middleOperatorIndex == std::string::npos)
 			middleOperatorIndex = str.rfind('-', indexOfImag);
 
 
@@ -62,7 +62,7 @@ ComplexNumber ComplexNumber::parse(const std::string & strParameter)
 
 			if (realStr.size() != 0) // if doesn't contain a real part
 				real = std::stod(realStr);
-			
+
 			std::string imagStr = str.substr(middleOperatorIndex, str.size() - middleOperatorIndex);
 
 			if (imagStr[1] == 'i') // +i, -i 
@@ -94,12 +94,57 @@ ComplexNumber ComplexNumber::parse(const std::string & strParameter)
 	return complexNumber;
 }
 
+
+void ComplexNumber::sortAndPrint(std::vector<ComplexNumber> &numbers)
+{
+	int len = numbers.size();
+
+	for (int i = 0; i < len - 1; i++)
+	{
+		for (int j = i + 1; j < len; j++)
+		{
+			if (numbers[j].a > numbers[i].a)
+			{
+				ComplexNumber temp = numbers[j];
+
+				numbers[j] = numbers[i];
+
+				numbers[i] = temp;
+			}
+		}
+	}
+
+	for (int i = 0; i < len - 1; i++)
+	{
+		for (int j = i + 1; j < len; j++)
+		{
+			if (numbers[j].b > numbers[i].b)
+			{
+				ComplexNumber temp = numbers[j];
+
+				numbers[j] = numbers[i];
+
+				numbers[i] = temp;
+			}
+		}
+	}
+
+
+
+	for (int i = 0; i < len; i++)
+	{
+		numbers[i].Show();
+
+		std::cout << std::endl;
+	}
+}
+
 void ComplexNumber::SetRealPart(double number)
 {
 	this->a = number;
 }
 
-double ComplexNumber::GetRealPart()
+double ComplexNumber::GetRealPart() const
 {
 	return this->a;
 }
@@ -109,7 +154,7 @@ void ComplexNumber::SetImagPart(double number)
 	this->b = number;
 }
 
-double ComplexNumber::GetImagPart()
+double ComplexNumber::GetImagPart() const
 {
 	return this->b;
 }
@@ -132,5 +177,5 @@ ComplexNumber ComplexNumber::operator/(const ComplexNumber& obj)
 
 void ComplexNumber::Show()
 {
-	std::cout << ((a != 0) ? std::to_string(a) : "") << ((b > 0) ? "+" : "") << ((b!=0) ? std::to_string(b) : "") << (b != 0 ? "i" : "");
+	std::cout << ((a != 0) ? std::to_string(a) : "") << ((b > 0) ? "+" : "") << ((b != 0) ? std::to_string(b) : "") << (b != 0 ? "i" : "");
 }
