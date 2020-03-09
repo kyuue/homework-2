@@ -23,11 +23,11 @@ public:
 
 	void SetRealPart(double number);
 
-	double GetRealPart();
+	double GetRealPart() const;
 
 	void SetImagPart(double number);
 
-	double GetImagPart();
+	double GetImagPart() const;
 
 	ComplexNumber operator + (ComplexNumber const &obj);
 
@@ -40,4 +40,6 @@ public:
 	////
 
 	static ComplexNumber parse(const std::string& str);
+
+	static void sortAndPrint(std::vector<ComplexNumber> &numbers);
 };
